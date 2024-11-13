@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => SerialColumn::class],
 
             Column::widget(),
-            
+
             'key' => [
                 'attribute' => 'Key',
                 'value' => function ($model) {

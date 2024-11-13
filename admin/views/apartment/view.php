@@ -53,14 +53,17 @@ $this->params['breadcrumbs'][] = RbacHtml::encode($this->title);
             [
                 'label' => 'Комнаты',
                 'format' => 'raw',
-                'value' => static function(\common\models\Apartment $apartment) {
-                    $res = '';
-                    foreach ($apartment->rooms as $room) {
-                        $res = $res . $room->title . ', ';
-//                        $res = Html::a($room->title, Url::toRoute(['room/view', 'id' => $room->id]), ['data-pjax' => '0']);
-                    }
-                    return $res;
+                'value' =>function ($model) {
+                    return Html::a('Комнаты', Url::toRoute(['room/index', 'id_apartment' => $model->id]), ['data-pjax' => '0']);
                 }
+//                'value' => static function(\common\models\Apartment $apartment) {
+//                    $res = '';
+//                    foreach ($apartment->rooms as $room) {
+//                        $res = $res . $room->title . ', ';
+////                        $res = Html::a($room->title, Url::toRoute(['room/view', 'id' => $room->id]), ['data-pjax' => '0']);
+//                    }
+//                    return $res;
+//                }
             ],
             Column::widget(['attr' => 'address']),
             Column::widget(['attr' => 'add_title']),

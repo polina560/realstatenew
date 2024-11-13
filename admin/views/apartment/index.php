@@ -48,17 +48,17 @@ $this->params['breadcrumbs'][] = $this->title;
 //            Column::widget(['attr' => 'add_title']),
 //            Column::widget(['attr' => 'add_img']),
 //            Column::widget(['attr' => 'API_flag']),
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{room}',
-                'buttons' => [
-                    'room' => function ($url, $model, $key) {
-                        return Html::a('Комнаты', Url::toRoute(['room/index', 'id_apartment' => $model->id]), ['data-pjax' => '0']);
-//                            Html::a('Комнаты', ['room/index', 'id_apartment' => $model->id]);
-//                            Html::a('Комнаты', Url::to(['room/index', 'id_apartment' => $model->id]));
-                    },
-                ],
-            ],
+//            [
+//                'class' => 'yii\grid\ActionColumn',
+//                'template' => '{room}',
+//                'buttons' => [
+//                    'room' => function ($url, $model, $key) {
+//                        return Html::a('Комнаты', Url::toRoute(['room/index', 'id_apartment' => $model->id]), ['data-pjax' => '0']);
+////                            Html::a('Комнаты', ['room/index', 'id_apartment' => $model->id]);
+////                            Html::a('Комнаты', Url::to(['room/index', 'id_apartment' => $model->id]));
+//                    },
+//                ],
+//            ],
 
             ['class' => GroupedActionColumn::class]
         ]
