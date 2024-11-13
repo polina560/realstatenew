@@ -19,8 +19,8 @@ use yii\helpers\Url;
 
 <!--    --><?php //= $form->field($model, 'id_gallery')->textInput() ?>
 
-    <?= $form->field($model, 'img')->textInput(['maxlength' => true]);
-//    widget(\admin\widgets\ckfinder\CKFinderInputFile::class);
+<!--    --><?php //= $form->field($model, 'img')->textInput(['maxlength' => true]);?>
+    <?= $form->field($model, 'img')->widget(\admin\widgets\ckfinder\CKFinderInputFile::class);
 //    textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
@@ -35,7 +35,7 @@ use yii\helpers\Url;
             );
             echo Html::submitButton(
                 Icon::show('save') . Yii::t('app', 'Save And Return To List'),
-                ['class' => 'btn btn-success', 'formaction' => Url::to() . '?redirect=index']
+                ['class' => 'btn btn-success', 'formaction' => Url::to(['gallery-image/index', 'id_gallery' => $model->id_gallery])]
             );
         } ?>
         <?= Html::submitButton(Icon::show('save') . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

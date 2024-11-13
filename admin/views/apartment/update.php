@@ -6,23 +6,28 @@ use yii\bootstrap5\Html;
 
 /**
  * @var $this  yii\web\View
- * @var $model common\models\Apartment
+ * @var $modelApartment common\models\Apartment
+ * @var $modelsRooms common\models\Room
  */
 
 $this->title = Yii::t('app', 'Update Apartment: {name}', [
-    'name' => $model->title,
+    'name' => $modelApartment->title,
 ]);
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Apartments'),
     'url' => UserUrl::setFilters(ApartmentSearch::class)
 ];
-$this->params['breadcrumbs'][] = ['label' => Html::encode($model->title), 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => Html::encode($modelApartment->title), 'url' => ['view', 'id' => $modelApartment->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');
 ?>
 <div class="apartment-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', ['model' => $model, 'isCreate' => false]) ?>
+    <?= $this->render('_form', [
+        'modelApartment' => $modelApartment,
+        'modelsRooms' => $modelsRooms,
+        'isCreate' => false
+    ]) ?>
 
 </div>

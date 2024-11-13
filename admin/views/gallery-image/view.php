@@ -1,6 +1,7 @@
 <?php
 
 use admin\components\widgets\detailView\Column;
+use admin\components\widgets\detailView\ColumnImage;
 use admin\modules\rbac\components\RbacHtml;
 use common\components\helpers\UserUrl;
 use common\models\GalleryImageSearch;
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app','Galleries'), 'url' =>
 $this->params['breadcrumbs'][] = ['label' => $model->gallery->name, 'url' => ['/gallery/view', 'id' => $model->id_gallery]];
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Gallery Images'),
-    'url' => UserUrl::setFilters(GalleryImageSearch::class)
+    'url' => UserUrl::setFilters(GalleryImageSearch::class, ['index', 'id_gallery' => $model->gallery->id])
 ];
 
 $this->params['breadcrumbs'][] = RbacHtml::encode($this->title);
@@ -44,8 +45,8 @@ $this->params['breadcrumbs'][] = RbacHtml::encode($this->title);
         'model' => $model,
         'attributes' => [
             Column::widget(),
-            Column::widget(['attr' => 'id_gallery']),
-            Column::widget(['attr' => 'img']),
+            Column::widget(['attr' => 'id_gallery', 'viewAttr' => 'gallery.title']),
+            ColumnImage::widget(['attr' => 'img']),
             Column::widget(['attr' => 'title']),
             Column::widget(['attr' => 'text', 'format' => 'ntext']),
         ]

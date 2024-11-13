@@ -12,9 +12,11 @@ use yii\bootstrap5\Html;
 $this->title = Yii::t('app', 'Update Room: {name}', [
     'name' => $model->title,
 ]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Apartment'), 'url' => ['/apartment/index']];
+$this->params['breadcrumbs'][] = ['label' => $model->apartment->title, 'url' => ['/apartment/view', 'id' => $model->id_apartment]];
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Rooms'),
-    'url' => UserUrl::setFilters(RoomSearch::class)
+    'url' => UserUrl::setFilters(RoomSearch::class, ['index', 'id_apartment' => $model->apartment->id])
 ];
 $this->params['breadcrumbs'][] = ['label' => Html::encode($model->title), 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Update');

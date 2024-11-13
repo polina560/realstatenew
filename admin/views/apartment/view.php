@@ -47,6 +47,17 @@ $this->params['breadcrumbs'][] = RbacHtml::encode($this->title);
             Column::widget(['attr' => 'price']),
             Column::widget(['attr' => 'floor']),
             Column::widget(['attr' => 'img']),
+            [
+                'label' => 'Комнаты',
+                'format' => 'raw',
+                'value' => static function(\common\models\Apartment $apartment) {
+                    $res = '';
+                    foreach ($apartment->rooms as $room) {
+                        
+                    }
+                    return $res;
+                }
+            ],
             Column::widget(['attr' => 'address']),
             Column::widget(['attr' => 'add_title']),
             Column::widget(['attr' => 'add_img']),

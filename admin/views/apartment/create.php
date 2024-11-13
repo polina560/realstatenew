@@ -6,7 +6,9 @@ use yii\bootstrap5\Html;
 
 /**
  * @var $this  yii\web\View
- * @var $model common\models\Apartment
+ * @var $modelApartment common\models\Apartment
+ * @var $modelsRooms common\models\Room
+
  */
 
 $this->title = Yii::t('app', 'Create Apartment');
@@ -20,6 +22,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form', ['model' => $model, 'isCreate' => true]) ?>
+    <?= $this->render('_form', [
+        'modelApartment' => $modelApartment,
+        'modelsRooms' => $modelsRooms,
+        'isCreate' => true
+    ]) ?>
 
 </div>

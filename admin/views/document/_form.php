@@ -17,9 +17,10 @@ use yii\helpers\Url;
 
     <?php $form = AppActiveForm::begin() ?>
 
-    <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+<!--    --><?php //= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'file')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'file')->widget(\admin\widgets\ckfinder\CKFinderInputFile::class) ?>
+
 
     <div class="form-group">
         <?php if ($isCreate) {

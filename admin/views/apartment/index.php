@@ -5,6 +5,8 @@ use admin\components\widgets\gridView\Column;
 use admin\modules\rbac\components\RbacHtml;
 use admin\widgets\sortableGridView\SortableGridView;
 use kartik\grid\SerialColumn;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ListView;
 
 /**
@@ -22,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= RbacHtml::encode($this->title) ?></h1>
 
     <div>
-        <?= 
+        <?=
             RbacHtml::a(Yii::t('app', 'Create Apartment'), ['create'], ['class' => 'btn btn-success']);
 //           $this->render('_create_modal', ['model' => $model]);
         ?>
@@ -46,6 +48,17 @@ $this->params['breadcrumbs'][] = $this->title;
 //            Column::widget(['attr' => 'add_title']),
 //            Column::widget(['attr' => 'add_img']),
 //            Column::widget(['attr' => 'API_flag']),
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{room}',
+                'buttons' => [
+                    'room' => function ($url, $model, $key) {
+                        return Html::a('Комнаты', Url::toRoute(['room/index', 'id_apartment' => $model->id]), ['data-pjax' => '0']);
+//                            Html::a('Комнаты', ['room/index', 'id_apartment' => $model->id]);
+//                            Html::a('Комнаты', Url::to(['room/index', 'id_apartment' => $model->id]));
+                    },
+                ],
+            ],
 
             ['class' => GroupedActionColumn::class]
         ]

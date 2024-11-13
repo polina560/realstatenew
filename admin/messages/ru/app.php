@@ -175,5 +175,27 @@ return [
     'Rooms' => 'Комнаты',
     'Documents' => 'Документы',
     'Gallery' => 'Галлереи',
-    'Gallery Images' => 'Изображения'
+    'Gallery Images' => 'Изображения',
+    'Create Gallery' => 'Создать галерею',
+    'Create Apartment' => 'Создать квартиру',
+    'Create Room' => 'Создать комнату',
+    'Create Document' => 'Создать документ',
+    'Create Gallery Image' => 'Создать изображение',
+    'Save Gallery' => 'Сохранить галерею',
+    'Save Apartment' => 'Сохранить квартиру',
+    'Save Room' => 'Сохранить комнату',
+    'Save Document' => 'Сохранить документ',
+    'Save Gallery Images' => 'Сохранить изображение',
+    'ID Gallery' => 'ID Галереи',
+    'ID Apartment' => 'ID Квартиры',
+    'Image' => 'Изображение',
+    'Subtitle' => 'Подзаголовк',
+    'Price' => 'Цена',
+    'Area' => 'Площадь',
+    'Floor' => 'Этаж',
+    'Address' => 'Адрес',
+    'Add Title' => 'Дополнительное название',
+    'Add Img' => 'Дополнительное изображение',
+    'Api Flag' => 'Доступность по API'
+
 ];

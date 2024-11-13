@@ -29,6 +29,11 @@ class GalleryImage extends AppActiveRecord
         return '{{%gallery_image}}';
     }
 
+    public static function externalAttributes(): array
+    {
+        return ['gallery.title'];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -51,40 +56,39 @@ class GalleryImage extends AppActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'id_gallery' => Yii::t('app', 'Id Gallery'),
-            'img' => Yii::t('app', 'Img'),
+            'id_gallery' => Yii::t('app', 'ID Gallery'),
+            'img' => Yii::t('app', 'Image'),
             'title' => Yii::t('app', 'Title'),
             'text' => Yii::t('app', 'Text'),
-            'imageFile' => Yii::t('app', 'Image'),
         ];
     }
 
-    public function beforeValidate(): bool
-    {
-        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
-        return parent::beforeValidate();
-    }
-
-    public function beforeSave($insert): bool
-    {
-        if ($this->imageFile instanceof UploadedFile) {
-            if (!$insert && !empty($this->img)) {
-                // удалить старую
-                $public = Yii::getAlias('@public');
-                $oldImagePath = $public . $this->img;
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath); // удаление файла
-                }
-            }
-            $randomName = Yii::$app->security->generateRandomString(8);
-            $public = Yii::getAlias('@public');
-            $path = '/uploads/' . $randomName . '.' . $this->imageFile->extension;
-            $this->imageFile->saveAs($public . $path);
-            $this->img = $path;
-        }
-
-        return parent::beforeSave($insert);
-    }
+//    public function beforeValidate(): bool
+//    {
+//        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
+//        return parent::beforeValidate();
+//    }
+//
+//    public function beforeSave($insert): bool
+//    {
+//        if ($this->img instanceof UploadedFile) {
+//            if (!$insert && !empty($this->img)) {
+//                // удалить старую
+//                $public = Yii::getAlias('@public');
+//                $oldImagePath = $public . $this->img;
+//                if (file_exists($oldImagePath)) {
+//                    unlink($oldImagePath); // удаление файла
+//                }
+//            }
+//            $randomName = Yii::$app->security->generateRandomString(8);
+//            $public = Yii::getAlias('@public');
+//            $path = '/uploads/' . $randomName . '.' . $this->imageFile->extension;
+//            $this->imageFile->saveAs($public . $path);
+//            $this->img = $path;
+//        }
+//
+//        return parent::beforeSave($insert);
+//    }
 
     public function getGallery(): ActiveQuery
     {

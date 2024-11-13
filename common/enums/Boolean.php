@@ -36,4 +36,10 @@ enum Boolean: int implements DictionaryInterface
             self::Yes => 'var(--bs-success)'
         };
     }
+
+//    public function getConstants(): array
+//    {
+//
+//        return array( self::Yes=>'Да',  self::No=>"Нет");
+//    }
 }

@@ -10,9 +10,11 @@ use yii\bootstrap5\Html;
  */
 
 $this->title = Yii::t('app', 'Create Gallery Image');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Galleries'), 'url' => ['/gallery/index']];
+$this->params['breadcrumbs'][] = ['label' => $model->gallery->name, 'url' => ['/gallery/view', 'id' => $model->id_gallery]];
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Gallery Images'),
-    'url' => UserUrl::setFilters(GalleryImageSearch::class)
+    'url' => UserUrl::setFilters(GalleryImageSearch::class, ['index', 'id_gallery' => $model->gallery->id])
 ];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

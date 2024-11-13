@@ -12,9 +12,11 @@ use yii\widgets\DetailView;
  */
 
 $this->title = $model->title;
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app','Apartment'), 'url' => ['/apartment/index']];
+$this->params['breadcrumbs'][] = ['label' => $model->apartment->title, 'url' => ['/apartment/view', 'id' => $model->id_apartment]];
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Rooms'),
-    'url' => UserUrl::setFilters(RoomSearch::class)
+    'url' => UserUrl::setFilters(RoomSearch::class, ['index', 'id_apartment' => $model->apartment->id])
 ];
 $this->params['breadcrumbs'][] = RbacHtml::encode($this->title);
 ?>

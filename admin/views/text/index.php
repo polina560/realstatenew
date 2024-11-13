@@ -21,9 +21,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= RbacHtml::encode($this->title) ?></h1>
 
+<!--     -->
+
     <div>
-        <?= $this->render('_create_modal', ['model' => $model]) ?>
-    </div>
+    <?=
+    RbacHtml::a(Yii::t('app', 'Create Text'), ['create'], ['class' => 'btn btn-success']);
+    //           $this->render('_create_modal', ['model' => $model]);
+    ?>
+</div>
 
     <?= SortableGridView::widget([
         'dataProvider' => $dataProvider,

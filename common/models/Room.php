@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\models\AppActiveRecord;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -31,7 +32,6 @@ class Room extends AppActiveRecord
     public function rules(): array
     {
         return [
-            [['id_apartment'], 'required'],
             [['id_apartment', 'area'], 'integer'],
             [['title', 'uid'], 'string', 'max' => 255]
         ];
@@ -44,10 +44,15 @@ class Room extends AppActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'id_apartment' => Yii::t('app', 'Id Apartment'),
+            'id_apartment' => Yii::t('app', 'ID Apartment'),
             'title' => Yii::t('app', 'Title'),
             'area' => Yii::t('app', 'Area'),
-            'uid' => Yii::t('app', 'Uid'),
+            'uid' => Yii::t('app', 'UID'),
         ];
+    }
+
+    public function getApartment(): ActiveQuery
+    {
+        return $this->hasOne(Apartment::class, ['id' => 'id_apartment']);
     }
 }

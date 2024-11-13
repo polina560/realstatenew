@@ -4,6 +4,7 @@ namespace common\models;
 
 use common\models\AppActiveRecord;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -20,6 +21,8 @@ use yii\helpers\ArrayHelper;
  * @property string|null $add_title
  * @property string|null $add_img
  * @property int|null    $API_flag
+ *
+ * @property-read Room[] $rooms
  */
 class Apartment extends AppActiveRecord
 {
@@ -55,11 +58,16 @@ class Apartment extends AppActiveRecord
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),
             'floor' => Yii::t('app', 'Floor'),
-            'img' => Yii::t('app', 'Img'),
+            'img' => Yii::t('app', 'Image'),
             'address' => Yii::t('app', 'Address'),
             'add_title' => Yii::t('app', 'Add Title'),
             'add_img' => Yii::t('app', 'Add Img'),
             'API_flag' => Yii::t('app', 'Api Flag'),
         ];
+    }
+
+    final public function getRooms(): ActiveQuery
+    {
+        return $this->hasMany(Room::class, ['id_apartment' => 'id']);
     }
 }

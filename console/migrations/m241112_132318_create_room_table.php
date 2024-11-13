@@ -12,7 +12,7 @@ class m241112_132318_create_room_table extends Migration
      */
     final public function safeUp()
     {
-        $this->CreateTable('{{%room}}', [
+        $this->createTable('{{%room}}', [
             'id' => 'int NOT NULL AUTO_INCREMENT',
             'id_apartment' => $this->integer()->notNull(),
             'title' => $this->string(),

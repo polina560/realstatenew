@@ -53,10 +53,7 @@ if (!Yii::$app->user->isGuest) {
                     'label' => Yii::t('app', 'Apartments'),
                     'url' => UserUrl::setFilters(ApartmentSearch::class, ['/apartment/index'])
                 ],
-                [
-                    'label' => Yii::t('app', 'Rooms'),
-                    'url' => UserUrl::setFilters(RoomSearch::class, ['/room/index'])
-                ],
+
                 [
                     'label' => Yii::t('app', 'Documents'),
                     'url' => UserUrl::setFilters(\common\models\DocumentSearch::class, ['/document/index'])
@@ -64,6 +61,10 @@ if (!Yii::$app->user->isGuest) {
                 [
                     'label' => Yii::t('app', 'Texts'),
                     'url' => UserUrl::setFilters(TextSearch::class, ['/text/index'])
+                ],
+                [
+                    'label' => Yii::t('app', 'Galleries'),
+                    'url' => UserUrl::setFilters(\common\models\GallerySearch::class, ['/gallery/index'])
                 ],
             ]
         ],

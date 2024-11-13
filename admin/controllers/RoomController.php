@@ -42,15 +42,17 @@ final class RoomController extends AdminController
      *
      * @throws InvalidConfigException
      */
-    public function actionIndex(): string
+    public function actionIndex(int $id_apartment): string
     {
         $model = new Room();
+
 
         if (RbacHtml::isAvailable(['create']) && $model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', "Элемент №$model->id создан успешно");
         }
 
         $searchModel = new RoomSearch();
+        $searchModel->id_apartment = $id_apartment;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render(

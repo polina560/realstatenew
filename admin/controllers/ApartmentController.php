@@ -2,11 +2,12 @@
 
 namespace admin\controllers;
 
-use admin\controllers\AdminController;
 use admin\modules\rbac\components\RbacHtml;
 use common\components\helpers\UserUrl;
 use common\models\Apartment;
 use common\models\ApartmentSearch;
+use common\models\Room;
+use Exception;
 use kartik\grid\EditableColumnAction;
 use Throwable;
 use Yii;
@@ -80,18 +81,50 @@ final class ApartmentController extends AdminController
      */
     public function actionCreate(string $redirect = null): Response|string
     {
-        $model = new Apartment();
+        $modelApartment = new Apartment();
+        $modelsRooms = [new Room()];
+        if ($modelApartment->load(Yii::$app->request->post())) {
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', "Элемент №$model->id создан успешно");
-            return match ($redirect) {
-                'create' => $this->redirect(['create']),
-                'index' => $this->redirect(UserUrl::setFilters(ApartmentSearch::class)),
-                default => $this->redirect(['view', 'id' => $model->id])
-            };
+            $modelsRooms = Room::createMultiple();
+            Room::loadMultiple($modelsRooms, Yii::$app->request->post());
+
+
+            // validate all models
+            $valid = $modelApartment->validate();
+            $valid = Room::validateMultiple($modelsRooms) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $modelApartment->save(false)) {
+                        foreach ($modelsRooms as $modelsRoom) {
+                            $modelsRoom->id_apartment = $modelApartment->id;
+                            if (!($flag = $modelsRoom->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelApartment->id]);
+//                        Yii::$app->session->setFlash('success', "Элемент №$modelApartment->id создан успешно");
+//                        return match ($redirect) {
+//                            'create' => $this->redirect(['create']),
+//                            'index' => $this->redirect(UserUrl::setFilters(ApartmentSearch::class)),
+//                            default => $this->redirect(['view', 'id' => $modelApartment->id])
+//                        };
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
         }
 
-        return $this->render('create', ['model' => $model]);
+        return $this->render('create', [
+            'modelApartment' => $modelApartment,
+            'modelsRooms' => (empty($modelsRooms)) ? [new Room()] : $modelsRooms
+        ]);
     }
 
     /**
@@ -104,14 +137,54 @@ final class ApartmentController extends AdminController
      */
     public function actionUpdate(int $id): Response|string
     {
-        $model = $this->findModel($id);
+        $modelApartment = $this->findModel($id);
+        $modelsRooms = $modelApartment->rooms;
+//            $modelApartment->addresses;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', "Элемент №$model->id изменен успешно");
-            return $this->redirect(['view', 'id' => $model->id]);
+        // primary key of $modelsAddress
+        $pkey = 'id';
+
+        if ($modelApartment->load(Yii::$app->request->post())) {
+
+            $oldIDs = ArrayHelper::map($modelsRooms, $pkey, $pkey);
+            $modelsRooms = Room::createMultiple($modelsRooms);
+            Room::loadMultiple($modelsRooms, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIDs, array_filter(ArrayHelper::map($modelsRooms, $pkey, $pkey)));
+
+
+            // validate all models
+            $valid = $modelApartment->validate();
+            $valid = Room::validateMultiple($modelsRooms) && $valid;
+
+            if ($valid) {
+                $transaction = \Yii::$app->db->beginTransaction();
+                try {
+                    if ($flag = $modelApartment->save(false)) {
+                        if (!empty($deletedIDs)) {
+                            Room::deleteAll([$pkey => $deletedIDs]);
+                        }
+                        foreach ($modelsRooms as $modelsRoom) {
+                            $modelsRoom->id_apartment = $modelApartment->id;
+                            if (!($flag = $modelsRoom->save(false))) {
+                                $transaction->rollBack();
+                                break;
+                            }
+                        }
+                    }
+                    if ($flag) {
+                        $transaction->commit();
+                        return $this->redirect(['view', 'id' => $modelApartment->id]);
+                    }
+                } catch (Exception $e) {
+                    $transaction->rollBack();
+                }
+            }
         }
 
-        return $this->render('update', ['model' => $model]);
+        return $this->render('update', [
+            'modelApartment' => $modelApartment,
+            'modelsRooms' => (empty($modelsRooms)) ? [new Room()] : $modelsRooms
+        ]);
     }
 
     /**
