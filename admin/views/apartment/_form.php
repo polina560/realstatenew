@@ -30,15 +30,15 @@ use yii\helpers\Url;
 
     <?= $form->field($modelApartment, 'floor')->textInput() ?>
 
-    <?= $form->field($modelApartment, 'img')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($modelApartment, 'img')->widget(\admin\widgets\ckfinder\CKFinderInputFile::class) ?>
 
     <?= $form->field($modelApartment, 'address')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($modelApartment, 'add_title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($modelApartment, 'add_img')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($modelApartment, 'add_img')->widget(\admin\widgets\ckfinder\CKFinderInputFile::class) ?>
 
-    <?= $form->field($modelApartment, 'API_flag')->textInput() ?>
+<!--    --><?php //= $form->field($modelApartment, 'API_flag')->textInput() ?>
 
 
     <?=

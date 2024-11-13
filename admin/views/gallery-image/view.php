@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = RbacHtml::encode($this->title);
         'model' => $model,
         'attributes' => [
             Column::widget(),
-            Column::widget(['attr' => 'id_gallery', 'viewAttr' => 'gallery.title']),
+            Column::widget(['attr' => 'id_gallery', 'viewAttr' => 'gallery.name']),
             ColumnImage::widget(['attr' => 'img']),
             Column::widget(['attr' => 'title']),
             Column::widget(['attr' => 'text', 'format' => 'ntext']),

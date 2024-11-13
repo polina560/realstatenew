@@ -11,10 +11,10 @@ use yii\bootstrap5\Html;
 
 $this->title = Yii::t('app', 'Create Room');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app','Apartment'), 'url' => ['/apartment/index']];
-$this->params['breadcrumbs'][] = ['label' => $model->apartment->title, 'url' => ['/apartment/view', 'id' => $model->id_apartment]];
+$this->params['breadcrumbs'][] = ['label' => $model->apartment, 'url' => ['/apartment/view', 'id' => ['room.apartment.id']]];
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Rooms'),
-    'url' => UserUrl::setFilters(RoomSearch::class, ['index', 'id_apartment' => $model->apartment->id])
+    'url' => UserUrl::setFilters(RoomSearch::class, ['index', 'id_apartment' => ['room.apartment.id']])
 ];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

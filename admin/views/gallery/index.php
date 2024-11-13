@@ -41,16 +41,16 @@ $this->params['breadcrumbs'][] = $this->title;
             Column::widget(['attr' => 'name']),
 
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{room}',
-                'buttons' => [
-                    'room' => function ($url, $model, $key) {
-                        return Html::a('Изображения', Url::to(['gallery-image/index', 'id_gallery' => $model->id]));
-//                            Html::a('Комнаты', ['room/index', 'id_apartment' => $model->id]);
-                    },
-                ],
-            ],
+//            [
+//                'class' => 'yii\grid\ActionColumn',
+//                'template' => '{room}',
+//                'buttons' => [
+//                    'room' => function ($url, $model, $key) {
+//                        return Html::a('Изображения', Url::to(['gallery-image/index', 'id_gallery' => $model->id]));
+////                            Html::a('Комнаты', ['room/index', 'id_apartment' => $model->id]);
+//                    },
+//                ],
+//            ],
 
             ['class' => GroupedActionColumn::class]
         ]

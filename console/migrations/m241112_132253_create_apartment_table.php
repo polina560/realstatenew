@@ -26,6 +26,7 @@ class m241112_132253_create_apartment_table extends Migration
             'API_flag' => $this->boolean(),
             'PRIMARY KEY(id)'
         ]);
+
     }
 
     /**

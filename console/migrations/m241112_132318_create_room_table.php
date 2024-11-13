@@ -19,8 +19,9 @@ class m241112_132318_create_room_table extends Migration
             'area' => $this->integer(),
             'uid' =>  $this->string(),
             'PRIMARY KEY(id)'
-
         ]);
+
+        $this->addForeignKey('FK_apartment_room', '{{%room}}', 'id_apartment', '{{%apartment}}', 'id', 'CASCADE', 'CASCADE');
     }
 
     /**

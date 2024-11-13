@@ -20,6 +20,9 @@ class m241112_132430_create_gallery_image_table extends Migration
             'text' => $this->text(),
             'PRIMARY KEY(id)'
         ]);
+
+        $this->addForeignKey('FK_gallery_image', '{{%gallery_image}}', 'id_gallery', '{{%gallery}}', 'id', 'CASCADE', 'CASCADE');
+
     }
 
     /**

@@ -10,19 +10,19 @@ use yii\helpers\ArrayHelper;
 /**
  * This is the model class for table "{{%apartment}}".
  *
- * @property int         $id
- * @property string      $title
- * @property string|null $subtitle
- * @property string|null $description
- * @property int         $price
- * @property int         $floor
- * @property string|null $img
- * @property string|null $address
- * @property string|null $add_title
- * @property string|null $add_img
- * @property int|null    $API_flag
+ * @property int              $id
+ * @property string           $title
+ * @property string|null      $subtitle
+ * @property string|null      $description
+ * @property int              $price
+ * @property int              $floor
+ * @property string|null      $img
+ * @property string|null      $address
+ * @property string|null      $add_title
+ * @property string|null      $add_img
+ * @property int|null         $API_flag
  *
- * @property-read Room[] $rooms
+ * @property-read Room[]      $rooms
  */
 class Apartment extends AppActiveRecord
 {
@@ -58,7 +58,7 @@ class Apartment extends AppActiveRecord
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),
             'floor' => Yii::t('app', 'Floor'),
-            'img' => Yii::t('app', 'Image'),
+            'img' => Yii::t('app', 'Img'),
             'address' => Yii::t('app', 'Address'),
             'add_title' => Yii::t('app', 'Add Title'),
             'add_img' => Yii::t('app', 'Add Img'),

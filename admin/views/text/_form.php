@@ -18,7 +18,12 @@ use yii\helpers\Url;
 
     <?php $form = AppActiveForm::begin() ?>
 
-    <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+<!--    --><?php //= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+    <?php
+    $const = new \common\models\TextStatus()?>
+    <?=
+    $form->field($model, 'key')->dropDownList($const->getConstants());
+    ?>
 
     <?= $form->field($model, 'value')
         ->textarea(['rows' => count(explode(PHP_EOL, (string)$model->value))]) ?>

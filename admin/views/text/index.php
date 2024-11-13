@@ -38,7 +38,15 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => SerialColumn::class],
 
             Column::widget(),
-            Column::widget(['attr' => 'key']),
+            
+            'key' => [
+                'attribute' => 'Key',
+                'value' => function ($model) {
+                    $const = new \common\models\TextStatus();
+                    return $const->getDeletableName($model->key);
+
+                }
+            ],
             Column::widget(['attr' => 'value', 'format' => 'html', 'width' => 700, 'type' => Editable::INPUT_TEXTAREA]),
 
             ['class' => GroupedActionColumn::class]

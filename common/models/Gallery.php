@@ -4,13 +4,16 @@ namespace common\models;
 
 use common\models\AppActiveRecord;
 use Yii;
+use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%gallery}}".
  *
- * @property int    $id
- * @property string $name
+ * @property int                 $id
+ * @property string              $name
+ *
+ * @property-read GalleryImage[] $galleryImages
  */
 class Gallery extends AppActiveRecord
 {
@@ -44,6 +47,7 @@ class Gallery extends AppActiveRecord
         ];
     }
 
+
     public function getGalleryNameArray()
     {
         $names = self::find()->select(['id', 'name'])->asArray()->all();
@@ -69,7 +73,7 @@ class Gallery extends AppActiveRecord
         return $results;
     }
 
-    public function getImages()
+    final public function getGalleryImages(): ActiveQuery
     {
         return $this->hasMany(GalleryImage::class, ['id_gallery' => 'id']);
     }

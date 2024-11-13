@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = RbacHtml::encode($this->title);
         'model' => $model,
         'attributes' => [
             Column::widget(),
-            Column::widget(['attr' => 'id_apartment']),
+            Column::widget(['attr' => 'id_apartment', 'viewAttr' => 'apartment.title']),
             Column::widget(['attr' => 'title']),
             Column::widget(['attr' => 'area']),
             Column::widget(['attr' => 'uid']),

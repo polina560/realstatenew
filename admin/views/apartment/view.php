@@ -4,6 +4,8 @@ use admin\components\widgets\detailView\Column;
 use admin\modules\rbac\components\RbacHtml;
 use common\components\helpers\UserUrl;
 use common\models\ApartmentSearch;
+use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /**
@@ -47,13 +49,15 @@ $this->params['breadcrumbs'][] = RbacHtml::encode($this->title);
             Column::widget(['attr' => 'price']),
             Column::widget(['attr' => 'floor']),
             Column::widget(['attr' => 'img']),
+
             [
                 'label' => 'Комнаты',
                 'format' => 'raw',
                 'value' => static function(\common\models\Apartment $apartment) {
                     $res = '';
                     foreach ($apartment->rooms as $room) {
-                        
+                        $res = $res . $room->title . ', ';
+//                        $res = Html::a($room->title, Url::toRoute(['room/view', 'id' => $room->id]), ['data-pjax' => '0']);
                     }
                     return $res;
                 }
