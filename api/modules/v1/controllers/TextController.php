@@ -47,7 +47,36 @@ final class TextController extends AppController
     ])]
     public function actionIndex(): array
     {
-        $texts = Text::find()->all();
-        return $this->returnSuccess($texts, 'texts');
+        $id = $this->getParameterFromRequest('id');
+
+
+        $query = Text::find();
+
+        if($id != null) {
+            $query->andWhere(['id' => $id]);
+            return [
+                'success' => true,
+                'data' => $query->one(),
+            ];
+        }
+
+        $provider = new ActiveDataProvider([
+            'query' => $query,
+//            'pagination' => [
+//                'pageSize' => 3
+//            ]
+        ]);
+
+
+        return $this->returnSuccess([
+            'texts' => $provider,
+
+        ]);
+//        $texts = Text::find()->all();
+//        return $this->returnSuccess($texts, 'texts');
     }
+
+
+
+
 }

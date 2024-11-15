@@ -1,8 +1,16 @@
 <?php
 
-namespace api\controllers;
+namespace api\modules\v1\controllers;
 
-class DocumentController extends AppController
+use api\components\devInfo\controllers\DevInfoController;
+use common\components\{Utils};
+use common\models\Apartment;
+use common\models\User;
+use yii\base\Controller;
+use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+
+class ApartmentControllers extends Controller
 {
 
     public function behaviors()
@@ -18,7 +26,7 @@ class DocumentController extends AppController
         $id = $this->getParameterFromRequest('id');
 
 
-        $query = Documents::find();
+        $query = Apartment::find()->with('rooms');
 
         if($id != null) {
             $query->andWhere(['id' => $id]);
@@ -27,6 +35,8 @@ class DocumentController extends AppController
                 'data' => $query->one(),
             ];
         }
+
+        $query->andWhere(['API_flag' => 1]);
 
         $provider = new ActiveDataProvider([
             'query' => $query,
@@ -37,7 +47,7 @@ class DocumentController extends AppController
 
 
         return $this->returnSuccess([
-            'documents' => $provider,
+            'apartments' => $provider,
 
         ]);
 

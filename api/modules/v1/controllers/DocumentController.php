@@ -1,8 +1,15 @@
 <?php
 
-namespace api\controllers;
+namespace api\modules\v1\controllers;
 
-class GalleryController extends AppController
+use api\controllers\ActiveDataProvider;
+use api\controllers\AppController;
+use api\controllers\ArrayHelper;
+use api\controllers\Documents;
+use common\models\Document;
+use OpenApi\Attributes\{Get, Items, Property};
+
+class DocumentController extends \api\modules\v1\controllers\AppController
 {
 
     public function behaviors()
@@ -18,16 +25,15 @@ class GalleryController extends AppController
         $id = $this->getParameterFromRequest('id');
 
 
-        $query = Gallery::find();
+        $query = Document::find();
 
-        if ($id != null) {
-            $query->where(['id' => $id]);
+        if($id != null) {
+            $query->andWhere(['id' => $id]);
             return [
                 'success' => true,
                 'data' => $query->one(),
             ];
         }
-        else $query->orderBy('id');
 
         $provider = new ActiveDataProvider([
             'query' => $query,
@@ -38,9 +44,10 @@ class GalleryController extends AppController
 
 
         return $this->returnSuccess([
-            'galleries' => $provider,
+            'documents' => $provider,
 
         ]);
+
 
     }
 }
