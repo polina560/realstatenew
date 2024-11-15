@@ -11,13 +11,17 @@ use Yii;
  * @package models
  * @author  m.kropukhinsky <m.kropukhinsky@peppers-studio.ru>
  *
- * @property int    $id    [int] ID
- * @property string $key   [varchar(255)] Ключ текстового поля
- * @property string $value Значение текстового поля
+ * @property int         $id    [int] ID
+ * @property string      $key   [varchar(255)] Ключ текстового поля
+ * @property string      $value Значение текстового поля
+ * @property string      $group
+ * @property int         $deletable
+ * @property string|null $comment
  */
 #[Schema(properties: [
     new Property(property: 'key', type: 'string'),
     new Property(property: 'value', type: 'string'),
+    new Property(property: 'group', type: 'string'),
 ])]
 class Text extends AppActiveRecord
 {
@@ -46,7 +50,7 @@ class Text extends AppActiveRecord
         return [
             [['key', 'value'], 'required'],
             ['value', 'string'],
-            ['key', 'string', 'max' => 255],
+            [['key', 'group', 'comment'], 'string', 'max' => 255],
         ];
     }
 
@@ -59,6 +63,9 @@ class Text extends AppActiveRecord
             'id' => Yii::t('app', 'ID'),
             'key' => Yii::t('app', 'Key'),
             'value' => Yii::t('app', 'Value'),
+            'group' => Yii::t('app', 'Group'),
+            'comment' => Yii::t('app', 'Comment'),
+            'deletable' => Yii::t('app', 'Deletable'),
         ];
     }
 
@@ -67,7 +74,7 @@ class Text extends AppActiveRecord
      */
     final public function fields(): array
     {
-        return ['key', 'value'];
+        return ['group', 'key', 'value'];
     }
 
 

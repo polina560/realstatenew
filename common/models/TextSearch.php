@@ -17,7 +17,7 @@ final class TextSearch extends Text
     {
         return [
             [['id'], 'integer'],
-            [['key', 'value'], 'safe']
+            [['key', 'value', 'group', 'comment'], 'safe']
         ];
     }
 
@@ -57,7 +57,9 @@ final class TextSearch extends Text
         ]);
 
         $query->andFilterWhere(['like', 'key', $this->key])
-            ->andFilterWhere(['like', 'value', $this->value]);
+            ->andFilterWhere(['like', 'value', $this->value])
+            ->andFilterWhere(['like', 'group', $this->group])
+            ->andFilterWhere(['like', 'comment', $this->comment]);
 
         return $dataProvider;
     }

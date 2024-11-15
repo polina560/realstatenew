@@ -197,6 +197,14 @@ return [
     'Add Title' => 'Дополнительное название',
     'Add Img' => 'Дополнительное изображение',
     'Api Flag' => 'Доступность по API',
-    'Apartment' => 'Квартиры'
-
+    'Apartment' => 'Квартиры',
+    'Update Gallery Image: ' => 'Изменить изображение: ',
+    'Update Gallery: ' => 'Изменить галерею: ',
+    'Update Document: ' => 'Изменить документ: ',
+    'Update Text: ' => 'Изменить текст: ',
+    'Update Apartment: ' => 'Изменить квартиру: ',
+    'Update Room: ' => 'Изменить комнату: ',
+    'Galleries' => 'Галереи',
+    'Comment' => 'Комментарий',
+    'File' => 'Файл'
 ];

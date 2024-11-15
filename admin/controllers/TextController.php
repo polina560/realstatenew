@@ -45,16 +45,37 @@ final class TextController extends AdminController
     public function actionIndex(): string
     {
         $model = new Text();
+        $model->deletable = 1;
 
         if (RbacHtml::isAvailable(['create']) && $model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', "Элемент №$model->id создан успешно");
         }
 
         $searchModel = new TextSearch();
+//        $searchModel->group = $group;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render(
             'index',
+            ['searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'model' => $model]
+        );
+    }
+
+    public function actionContacts(): string
+    {
+        $model = new Text();
+        $model->deletable = 1;
+
+        if (RbacHtml::isAvailable(['create']) && $model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', "Элемент №$model->id создан успешно");
+        }
+
+        $searchModel = new TextSearch();
+        $searchModel->group = 'contacts';
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render(
+            'contacts',
             ['searchModel' => $searchModel, 'dataProvider' => $dataProvider, 'model' => $model]
         );
     }
@@ -81,7 +102,7 @@ final class TextController extends AdminController
     public function actionCreate(string $redirect = null): Response|string
     {
         $model = new Text();
-
+        $model->deletable = 1;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', "Элемент №$model->id создан успешно");
             return match ($redirect) {
@@ -125,7 +146,11 @@ final class TextController extends AdminController
      */
     public function actionDelete(int $id): Response
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        if (!$model->deletable) {
+            throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
+        }
+        $model->delete();
         Yii::$app->session->setFlash('success', "Элемент №$id удален успешно");
         return $this->redirect(UserUrl::setFilters(TextSearch::class));
     }

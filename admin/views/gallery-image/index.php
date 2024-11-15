@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             Column::widget(),
 //            Column::widget(['attr' => 'id_gallery']),
-            Column::widget(['attr' => 'img']),
+//            Column::widget(['attr' => 'img', 'editable' => false]),
             Column::widget(['attr' => 'title']),
             Column::widget(['attr' => 'text', 'format' => 'ntext']),
 

@@ -9,9 +9,7 @@ use yii\bootstrap5\Html;
  * @var $model common\models\Text
  */
 
-$this->title = Yii::t('app', 'Update Text: {name}', [
-    'name' => $model->id,
-]);
+$this->title = Yii::t('app', 'Update Text: ') . $model->id;
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Texts'),
     'url' => UserUrl::setFilters(TextSearch::class)

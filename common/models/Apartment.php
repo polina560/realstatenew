@@ -58,7 +58,7 @@ class Apartment extends AppActiveRecord
             'description' => Yii::t('app', 'Description'),
             'price' => Yii::t('app', 'Price'),
             'floor' => Yii::t('app', 'Floor'),
-            'img' => Yii::t('app', 'Img'),
+            'img' => Yii::t('app', 'Image'),
             'address' => Yii::t('app', 'Address'),
             'add_title' => Yii::t('app', 'Add Title'),
             'add_img' => Yii::t('app', 'Add Img'),

@@ -89,7 +89,7 @@ final class GalleryImageController extends AdminController
             Yii::$app->session->setFlash('success', "Элемент №$model->id создан успешно");
             return match ($redirect) {
                 'create' => $this->redirect(['create']),
-                'index' => $this->redirect(UserUrl::setFilters(GalleryImageSearch::class)),
+                'index' => $this->redirect(UserUrl::setFilters(GalleryImageSearch::class, ['index', 'id_gallery' => $model->id_gallery])),
                 default => $this->redirect(['view', 'id' => $model->id])
             };
         }

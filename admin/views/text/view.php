@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= RbacHtml::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= RbacHtml::a(
+        <?= $model->deletable ? RbacHtml::a(
             Yii::t('app', 'Delete'),
             ['delete', 'id' => $model->id],
             [
@@ -34,22 +34,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     'method' => 'post'
                 ]
             ]
-        ) ?>
+        ) : null ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             Column::widget(),
-            'key' => [
-                'attribute' => 'Key',
-                'value' => function ($model) {
-                    $const = new \common\models\TextStatus();
-                    return $const->getDeletableName($model->key);
-
-                }
-            ],
+            Column::widget(['attr' => 'group']),
+            Column::widget(['attr' => 'key']),
             Column::widget(['attr' => 'value', 'format' => 'html']),
+            Column::widget(['attr' => 'comment']),
         ]
     ]) ?>
 

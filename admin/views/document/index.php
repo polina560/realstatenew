@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= RbacHtml::encode($this->title) ?></h1>
 
     <div>
-        <?= 
+        <?=
             RbacHtml::a(Yii::t('app', 'Create Document'), ['create'], ['class' => 'btn btn-success']);
 //           $this->render('_create_modal', ['model' => $model]);
         ?>
@@ -36,8 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => SerialColumn::class],
 
             Column::widget(),
-            Column::widget(['attr' => 'key']),
-            Column::widget(['attr' => 'file']),
+            Column::widget(['attr' => 'key', 'editable' => false]),
+            Column::widget(['attr' => 'file', 'editable' => false]),
 
             ['class' => GroupedActionColumn::class]
         ]

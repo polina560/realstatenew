@@ -9,9 +9,7 @@ use yii\bootstrap5\Html;
  * @var $model common\models\Document
  */
 
-$this->title = Yii::t('app', 'Update Document: {name}', [
-    'name' => $model->id,
-]);
+$this->title = Yii::t('app', 'Update Document: ') . $model->id;
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Documents'),
     'url' => UserUrl::setFilters(DocumentSearch::class)

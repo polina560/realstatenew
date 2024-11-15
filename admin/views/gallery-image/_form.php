@@ -35,7 +35,7 @@ use yii\helpers\Url;
             );
             echo Html::submitButton(
                 Icon::show('save') . Yii::t('app', 'Save And Return To List'),
-                ['class' => 'btn btn-success', 'formaction' => Url::to(['gallery-image/index', 'id_gallery' => $model->id_gallery])]
+                ['class' => 'btn btn-success', 'formaction' => Url::to() . '?redirect=index']
             );
         } ?>
         <?= Html::submitButton(Icon::show('save') . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

@@ -54,8 +54,8 @@ class GalleryImage extends AppActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'id_gallery' => Yii::t('app', 'Id Gallery'),
-            'img' => Yii::t('app', 'Img'),
+            'id_gallery' => Yii::t('app', 'ID Gallery'),
+            'img' => Yii::t('app', 'Image'),
             'title' => Yii::t('app', 'Title'),
             'text' => Yii::t('app', 'Text'),
         ];

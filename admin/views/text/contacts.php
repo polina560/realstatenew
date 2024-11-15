@@ -21,7 +21,7 @@ $this->title = Yii::t('app', 'Texts');
 $this->params['breadcrumbs'][] = $this->title;
 $readonly = fn(Text $text) => !$text->deletable
 ?>
-<div class="text-index">
+<div class="text-contacts">
 
     <h1><?= RbacHtml::encode($this->title) ?></h1>
 

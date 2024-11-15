@@ -36,7 +36,7 @@ use yii\helpers\Url;
 
     <?= $form->field($modelApartment, 'add_title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($modelApartment, 'add_img')->widget(\admin\widgets\ckfinder\CKFinderInputFile::class) ?>
+    <?= $form->field($modelApartment, 'add_img')->widget(\admin\widgets\ckfinder\CKFinderInputFile::class, ['resourceType' => 'Svg']) ?>
 
 <!--    --><?php //= $form->field($modelApartment, 'API_flag')->textInput() ?>
 

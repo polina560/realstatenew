@@ -10,9 +10,7 @@ use yii\bootstrap5\Html;
  * @var $modelsRooms common\models\Room
  */
 
-$this->title = Yii::t('app', 'Update Apartment: {name}', [
-    'name' => $modelApartment->title,
-]);
+$this->title = Yii::t('app', 'Update Apartment: ') . $modelApartment->title;
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Apartments'),
     'url' => UserUrl::setFilters(ApartmentSearch::class)

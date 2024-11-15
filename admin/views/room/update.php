@@ -9,9 +9,7 @@ use yii\bootstrap5\Html;
  * @var $model common\models\Room
  */
 
-$this->title = Yii::t('app', 'Update Room: {name}', [
-    'name' => $model->title,
-]);
+$this->title = Yii::t('app', 'Update Room: ') . $model->title;
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app','Apartment'), 'url' => ['/apartment/index']];
 $this->params['breadcrumbs'][] = ['label' => $model->apartment->title, 'url' => ['/apartment/view', 'id' => $model->id_apartment]];
 $this->params['breadcrumbs'][] = [

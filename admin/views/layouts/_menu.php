@@ -73,6 +73,10 @@ if (!Yii::$app->user->isGuest) {
             'items' => Gallery::viewMenuItems()
         ],
         [
+            'label' => 'Контакты',
+            'url' => ['/text/contacts']
+        ],
+        [
             'label' => Icon::show('cogs') . 'Управление',
             'items' => [
                 [

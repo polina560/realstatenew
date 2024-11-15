@@ -1,5 +1,6 @@
 <?php
 
+use admin\widgets\ckfinder\CKFinderInputFile;
 use common\widgets\AppActiveForm;
 use kartik\icons\Icon;
 use yii\bootstrap5\Html;
@@ -15,15 +16,18 @@ use yii\helpers\Url;
 
 <div class="document-form">
 
-    <?php $form = AppActiveForm::begin() ?>
+    <?php
+    $form = AppActiveForm::begin() ?>
 
-<!--    --><?php //= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+    <!--    --><?php
+    //= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'file')->widget(\admin\widgets\ckfinder\CKFinderInputFile::class) ?>
+    <?= $form->field($model, 'file')->widget(CKFinderInputFile::class, ['resourceType' => 'Files', 'isImage' => false]) ?>
 
 
     <div class="form-group">
-        <?php if ($isCreate) {
+        <?php
+        if ($isCreate) {
             echo Html::submitButton(
                 Icon::show('save') . Yii::t('app', 'Save And Create New'),
                 ['class' => 'btn btn-success', 'formaction' => Url::to() . '?redirect=create']
@@ -36,6 +40,7 @@ use yii\helpers\Url;
         <?= Html::submitButton(Icon::show('save') . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
-    <?php AppActiveForm::end() ?>
+    <?php
+    AppActiveForm::end() ?>
 
 </div>

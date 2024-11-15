@@ -131,6 +131,14 @@ $config['resourceTypes'] = [
         'backend' => $backend
     ],
     [
+        'name' => 'Svg',
+        'directory' => 'images',
+        'maxSize' => 0,
+        'allowedExtensions' => 'svg',
+        'deniedExtensions' => '',
+        'backend' => $backend
+    ],
+    [
         'name' => 'Audio',
         'directory' => 'audio',
         'maxSize' => 0,

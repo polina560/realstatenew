@@ -9,9 +9,7 @@ use yii\bootstrap5\Html;
  * @var $model common\models\Gallery
  */
 
-$this->title = Yii::t('app', 'Update Gallery: {name}', [
-    'name' => $model->name,
-]);
+$this->title = Yii::t('app', 'Update Gallery: ') . $model->name;
 $this->params['breadcrumbs'][] = [
     'label' => Yii::t('app', 'Galleries'),
     'url' => UserUrl::setFilters(GallerySearch::class)

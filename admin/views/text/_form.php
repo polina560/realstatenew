@@ -1,6 +1,5 @@
 <?php
 
-use admin\widgets\ckfinder\CKFinderInputFile;
 use common\widgets\AppActiveForm;
 use kartik\icons\Icon;
 use yii\bootstrap5\Html;
@@ -16,20 +15,25 @@ use yii\helpers\Url;
 
 <div class="text-form">
 
-    <?php $form = AppActiveForm::begin() ?>
-
-<!--    --><?php //= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
     <?php
-    $const = new \common\models\TextStatus()?>
-    <?=
-    $form->field($model, 'key')->dropDownList($const->getConstants());
-    ?>
+    $form = AppActiveForm::begin() ?>
+    <?php if ($model->deletable): ?>
+        <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+
+        <?= $form->field($model, 'group')->dropDownList(['contacts' => 'Контакты', null => 'Без группы']); ?>
+    <?php endif ?>
 
     <?= $form->field($model, 'value')
+        ->widget(\admin\widgets\ckeditor\EditorClassic::class);
+//        ->textarea(['rows' => count(explode(PHP_EOL, (string)$model->value))]) ?>
+
+    <?= $form->field($model, 'comment')
         ->textarea(['rows' => count(explode(PHP_EOL, (string)$model->value))]) ?>
 
+
     <div class="form-group">
-        <?php if ($isCreate) {
+        <?php
+        if ($isCreate) {
             echo Html::submitButton(
                 Icon::show('save') . Yii::t('app', 'Save And Create New'),
                 ['class' => 'btn btn-success', 'formaction' => Url::to() . '?redirect=create']
@@ -42,6 +46,7 @@ use yii\helpers\Url;
         <?= Html::submitButton(Icon::show('save') . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
-    <?php AppActiveForm::end() ?>
+    <?php
+    AppActiveForm::end() ?>
 
 </div>
