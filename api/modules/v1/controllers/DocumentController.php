@@ -2,25 +2,40 @@
 
 namespace api\modules\v1\controllers;
 
-use api\controllers\ActiveDataProvider;
-use api\controllers\AppController;
-use api\controllers\ArrayHelper;
-use api\controllers\Documents;
+
+use api\behaviors\returnStatusBehavior\JsonSuccess;
 use common\models\Document;
 use OpenApi\Attributes\{Get, Items, Property};
+use yii\data\ActiveDataProvider;
+use yii\helpers\ArrayHelper;
+
 
 class DocumentController extends \api\modules\v1\controllers\AppController
 {
 
-    public function behaviors()
+    public function behaviors(): array
     {
-        return ArrayHelper::merge(parent::behaviors(), [
-            'authentificator' => ['except' => ['index']],
-
-        ]);
+        return ArrayHelper::merge(parent::behaviors(), ['auth' => ['except' => ['index']]]);
     }
 
-    public function actionIndex()
+    /**
+     * Returns a list of Document's
+     */
+    #[Get(
+        path: '/document/index',
+        operationId: 'document-index',
+        description: 'Возвращает полный список документов',
+        summary: 'Список документов',
+        security: [['bearerAuth' => []]],
+        tags: ['document']
+    )]
+    #[JsonSuccess(content: [
+        new Property(
+            property: 'documents', type: 'array',
+            items: new Items(ref: '#/components/schemas/Document'),
+        )
+    ])]
+    public function actionIndex(): array
     {
         $id = $this->getParameterFromRequest('id');
 

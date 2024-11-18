@@ -3,6 +3,8 @@
 namespace common\models;
 
 use common\models\AppActiveRecord;
+use OpenApi\Attributes\Property;
+use OpenApi\Attributes\Schema;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
@@ -14,10 +16,17 @@ use yii\web\UploadedFile;
  * @property string $key
  * @property string $file
  */
+
+#[Schema(properties: [
+    new Property(property: 'id', type: 'integer'),
+    new Property(property: 'key', type: 'string'),
+    new Property(property: 'file', type: 'string'),
+
+])]
 class Document extends AppActiveRecord
 {
 
-    public UploadedFile|string|null $newFile = null;
+
     /**
      * {@inheritdoc}
      */
@@ -35,6 +44,15 @@ class Document extends AppActiveRecord
             [['file'], 'required'],
             [['key', 'file'], 'string', 'max' => 255],
             [['newFile'], 'file', 'skipOnEmpty' => false],
+        ];
+    }
+
+    final public function fields(): array
+    {
+        return [
+            'id',
+            'key',
+            'file',
         ];
     }
 

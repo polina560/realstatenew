@@ -189,6 +189,14 @@ abstract class AppController extends ActiveController
         }
     }
 
+    protected function getParameterFromRequest( $param_name ){
+        $param = Yii::$app->request->post($param_name);
+        if(!$param){
+            $param = Yii::$app->request->get($param_name);
+        }
+        return $param;
+    }
+
     /**
      * {@inheritdoc}
      */

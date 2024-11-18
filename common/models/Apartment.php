@@ -3,6 +3,8 @@
 namespace common\models;
 
 use common\models\AppActiveRecord;
+use OpenApi\Attributes\Property;
+use OpenApi\Attributes\Schema;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
@@ -24,8 +26,24 @@ use yii\helpers\ArrayHelper;
  *
  * @property-read Room[]      $rooms
  */
+
+#[Schema(properties: [
+    new Property(property: 'id', type: 'integer'),
+    new Property(property: 'title', type: 'string'),
+    new Property(property: 'subtitle', type: 'string'),
+    new Property(property: 'description', type: 'string'),
+    new Property(property: 'price', type: 'string'),
+    new Property(property: 'floor', type: 'string'),
+    new Property(property: 'img', type: 'string'),
+    new Property(property: 'address', type: 'string'),
+    new Property(property: 'add_title', type: 'string'),
+    new Property(property: 'add_img', type: 'string'),
+    new Property(property: 'rooms', type: 'string'),
+])]
 class Apartment extends AppActiveRecord
 {
+
+
     /**
      * {@inheritdoc}
      */
@@ -43,6 +61,24 @@ class Apartment extends AppActiveRecord
             [['title', 'price', 'floor'], 'required'],
             [['price', 'floor', 'API_flag'], 'integer'],
             [['title', 'subtitle', 'description', 'img', 'address', 'add_title', 'add_img'], 'string', 'max' => 255]
+        ];
+    }
+
+    final public function fields(): array
+    {
+        return [
+            'id',
+            'title',
+            'subtitle',
+            'description',
+            'price',
+            'floor',
+            'img' => fn() => Yii::$app->request->hostInfo . $this->img,
+            'address',
+            'add_title',
+            'add_img' => fn() => Yii::$app->request->hostInfo . $this->add_img,
+//            'API_flag',
+            'rooms'
         ];
     }
 

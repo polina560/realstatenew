@@ -5,6 +5,7 @@ namespace api\modules\v1\controllers;
 use api\behaviors\returnStatusBehavior\JsonSuccess;
 use common\models\Text;
 use OpenApi\Attributes\{Get, Items, Property};
+use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;
 
 /**

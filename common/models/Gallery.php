@@ -3,6 +3,8 @@
 namespace common\models;
 
 use common\models\AppActiveRecord;
+use OpenApi\Attributes\Property;
+use OpenApi\Attributes\Schema;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
@@ -15,6 +17,13 @@ use yii\helpers\ArrayHelper;
  *
  * @property-read GalleryImage[] $galleryImages
  */
+
+#[Schema(properties: [
+    new Property(property: 'id', type: 'integer'),
+    new Property(property: 'name', type: 'string'),
+    new Property(property: 'images', type: 'string'),
+
+])]
 class Gallery extends AppActiveRecord
 {
     /**
@@ -33,6 +42,15 @@ class Gallery extends AppActiveRecord
         return [
             [['name'], 'required'],
             [['name'], 'string', 'max' => 255]
+        ];
+    }
+
+    final public function fields(): array
+    {
+        return [
+            'id',
+            'name',
+            'images',
         ];
     }
 
@@ -73,7 +91,7 @@ class Gallery extends AppActiveRecord
         return $results;
     }
 
-    final public function getGalleryImages(): ActiveQuery
+    final public function getImages(): ActiveQuery
     {
         return $this->hasMany(GalleryImage::class, ['id_gallery' => 'id']);
     }
